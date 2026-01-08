@@ -18,13 +18,18 @@ public class VehicleController {
         return vehicleService.getAllVehicles();
     }
 
+    @GetMapping("/{id}")
+    public Vehicle getVehicleById(@PathVariable("id") Long id) {
+        return vehicleService.getVehicleById(id);
+    }
+
     @PostMapping
     public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
         return vehicleService.saveVehicle(vehicle);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteVehicle(@PathVariable Long id) {
+    public void deleteVehicle(@PathVariable("id") Long id) {
         vehicleService.deleteVehicle(id);
     }
 }

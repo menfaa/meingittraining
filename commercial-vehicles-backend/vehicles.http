@@ -1,8 +1,6 @@
 GET http://localhost:8080/api/vehicles
 
 ###
-
-###
 POST http://localhost:8080/api/vehicles
 Content-Type: application/json
 
@@ -24,5 +22,13 @@ Content-Type: application/json
   "loadCapacity": 50
 }
 
+
 ###
-DELETE http://localhost:8080/api/vehicles/2
+GET http://localhost:8080/api/vehicles
+
+###
+GET http://localhost:8080/api/vehicles/1
+
+
+###
+DELETE http://localhost:8080/api/vehicles/1
