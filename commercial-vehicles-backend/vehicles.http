@@ -1,6 +1,8 @@
 GET http://localhost:8080/api/vehicles
 
 ###
+
+###
 POST http://localhost:8080/api/vehicles
 Content-Type: application/json
 
@@ -9,6 +11,17 @@ Content-Type: application/json
   "vehicleYear": 2014,
   "mileage": 172000,
   "loadCapacity": 60
+}
+
+###
+POST http://localhost:8080/api/vehicles
+Content-Type: application/json
+
+{
+  "model": "VW Golf",
+  "vehicleYear": 2021,
+  "mileage": 112000,
+  "loadCapacity": 50
 }
 
 ###
