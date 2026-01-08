@@ -21,7 +21,7 @@ Content-Type: application/json
   "model": "VW Golf",
   "vehicleYear": 2020,
   "mileage": 112000,
-  "loadCapacity": 50
+  "loadCapacity": 55
 }
 
 ###
