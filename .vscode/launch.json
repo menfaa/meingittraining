@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CommercialVehiclesApplication<vehicles-commercial-vehicles-backend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.vehicles.CommercialVehiclesApplication",
+            "projectName": "vehicles-commercial-vehicles-backend",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
