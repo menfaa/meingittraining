@@ -31,18 +31,7 @@ Content-Type: application/json
 {
   "model": "BMW",
   "vehicleYear": 2020,
-  "mileage": 112000,
-  "loadCapacity": 55
-}
 
-###
-POST http://localhost:8080/api/vehicles
-Content-Type: application/json
-
-{
-  "model": "Mercede2s",
-  "vehicleYear": 2020,
-  "mileage": 112000,
   "loadCapacity": 55
 }
 
