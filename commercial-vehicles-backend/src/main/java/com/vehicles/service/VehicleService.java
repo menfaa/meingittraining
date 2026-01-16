@@ -1,5 +1,7 @@
 package com.vehicles.service;
 
+import com.vehicles.exceptions.NoVehicleFoundException;
+import com.vehicles.exceptions.NoVehicleFoundWebException;
 import com.vehicles.model.Vehicle;
 import com.vehicles.repository.VehicleRepository;
 
@@ -19,9 +21,21 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
-    public Vehicle getVehicleById(Long id) {
+    public Vehicle getVehicleByE1Id(Long id) {
         return vehicleRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Vehicle with Id " + id + "not found"));
+    }
+
+    public Vehicle getVehicleByE2Id(Long id) {
+        return vehicleRepository.findById(id)
+                .orElseThrow(() -> new NoVehicleFoundWebException());
+
+    }
+
+    public Vehicle getVehicleByE3Id(Long id) {
+        return vehicleRepository.findById(id)
+                .orElseThrow(() -> new NoVehicleFoundException());
+
     }
 
     public Vehicle saveVehicle(Vehicle vehicle) {
