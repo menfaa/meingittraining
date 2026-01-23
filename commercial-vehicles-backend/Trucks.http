@@ -1,9 +1,9 @@
-GET http://localhost:9090/api/vehicles
+GET http://localhost:8080/api/vehicles
 
 ###
 
 ###
-POST http://localhost:9090/api/vehicles
+POST http://localhost:8080/api/vehicles
 Content-Type: application/json
 
 {
@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:9090/api/vehicles
+POST http://localhost:8080/api/vehicles
 Content-Type: application/json
 
 {
@@ -25,7 +25,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:9090/api/vehicles
+POST http://localhost:8080/api/vehicles
 Content-Type: application/json
 
 {
@@ -37,17 +37,17 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:9090/api/vehicles/e1/1
+GET http://localhost:8080/api/vehicles/e1/1
 
 ###
-GET http://localhost:9090/api/vehicles/e2/1
+GET http://localhost:8080/api/vehicles/e2/1
 
 ###
-GET http://localhost:9090/api/vehicles/e3/1
+GET http://localhost:8080/api/vehicles/e3/1
 
 
 ###
-DELETE http://localhost:9090/api/vehicles/1
+DELETE http://localhost:8080/api/vehicles/1
 
 ###
-DELETE http://localhost:9090/api/vehicles/2
+DELETE http://localhost:8080/api/vehicles/2
