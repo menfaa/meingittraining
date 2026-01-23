@@ -22,7 +22,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-	//implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 		// Datenbank Dependencies
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	//runtimeOnly 'com.h2database:h2'
@@ -32,6 +32,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-test'
 	testImplementation 'org.testcontainers:testcontainers-junit-jupiter:2.0.3'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	//testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
@@ -46,6 +47,11 @@ dependencies {
     
     // Core module required because the starter misses transitive links in 4.0.1
     testImplementation 'org.springframework.boot:spring-boot-restclient'
+
+	 testImplementation 'org.assertj:assertj-core:3.24.2'
+
+	 testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
+	
 
 
 
