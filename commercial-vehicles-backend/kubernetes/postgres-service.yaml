@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres  # Name des Services
+spec:
+  type: ClusterIP  # Service-Typ (nur intern im Cluster erreichbar)
+  selector:
+    app: postgres  # Verbindet Service mit Pods, die dieses Label haben
+  ports:
+    - port: 5432  # Port, auf dem der Service erreichbar ist
+      targetPort: 5432  # Port im Pod, an den weitergeleitet wird
+
+
+# Die Datei definiert einen Kubernetes Service für die PostgreSQL-Datenbank. 
+# Ein Service in Kubernetes sorgt dafür, dass Anwendungen innerhalb des Clusters zuverlässig miteinander kommunizieren können, 
+# auch wenn sich die zugrunde liegenden Pods ändern oder neu gestartet werden.
+
+# In diesem Fall wird ein Service mit dem Namen postgres erstellt. 
+# Der Typ des Services ist ClusterIP, was bedeutet, dass der Service nur innerhalb des Kubernetes-Clusters erreichbar ist und nicht von außen zugänglich ist. 
+# Das ist sinnvoll, wenn beispielsweise nur andere Anwendungen im selben Cluster auf die Datenbank zugreifen sollen.
+
+# Der Service verwendet einen Selector mit dem Label app: postgres. 
+# Dadurch werden alle Pods, die dieses Label besitzen (wie der zuvor definierte PostgreSQL-Pod), mit dem Service verbunden.
+
+# Im Abschnitt ports wird festgelegt, dass der Service auf Port 5432 erreichbar ist und Anfragen an diesen Port an den gleichen Port (5432) im Pod weiterleitet. 
+# Das ist der Standardport, auf dem PostgreSQL läuft.
+
+# Zusammengefasst stellt diese Datei sicher, dass die PostgreSQL-Datenbank innerhalb des Kubernetes-Clusters unter einem festen Namen (postgres) und Port (5432) erreichbar ist, 
+# unabhängig davon, wie oft der zugrunde liegende Pod neu gestartet oder ersetzt wird.

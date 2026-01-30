@@ -1,0 +1,25 @@
+apiVersion: v1 # Gibt die API-Version an, die für dieses Objekt verwendet wird
+kind: PersistentVolumeClaim # Definiert den Typ des Kubernetes-Objekts (hier: PVC)
+metadata:
+  name: postgres-data-pvc # Name des PersistentVolumeClaim
+spec:
+  accessModes:
+    - ReadWriteOnce # Das Volume kann von genau einem Node gelesen und beschrieben werden
+  resources:
+    requests:
+      storage: 5Gi # Fordert 5 Gigabyte Speicherplatz an
+  storageClassName: local-path # Verwendet die StorageClass "local-path" für lokale Speicherung
+
+#  Die Datei beschreibt ein Kubernetes-Objekt vom Typ PersistentVolumeClaim (PVC). Ein PVC ist eine Anfrage an das Kubernetes-Cluster, Speicherplatz bereitzustellen, 
+#  der von einem Pod genutzt werden kann. In diesem Fall wird ein Speicheranspruch mit dem Namen postgres-data-pvc erstellt.
+
+# Im Abschnitt spec wird festgelegt, dass der Speicher im Modus ReadWriteOnce bereitgestellt werden soll. 
+# Das bedeutet, dass das Volume nur von einem einzelnen Node gleichzeitig gelesen und beschrieben werden kann. 
+# Unter resources.requests wird angegeben, dass 5 Gigabyte Speicherplatz benötigt werden.
+
+# Mit storageClassName: local-path wird festgelegt, dass die StorageClass "local-path" verwendet werden soll. 
+# Diese StorageClass sorgt dafür, dass der Speicher lokal auf dem Node bereitgestellt wird, auf dem der Pod läuft. 
+# Das ist besonders nützlich für Entwicklungsumgebungen oder wenn Daten lokal und nicht auf einem Netzwerk-Storage gespeichert werden sollen.
+
+# Zusammengefasst sorgt diese Datei dafür, dass ein Pod im Kubernetes-Cluster Zugriff auf ein 5 GB großes, lokal gespeichertes Volume erhält, 
+# das exklusiv von einem Node genutzt werden kann.

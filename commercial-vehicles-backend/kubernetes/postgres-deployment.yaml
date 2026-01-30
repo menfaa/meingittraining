@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres  # Name des Deployments
+spec:
+  replicas: 1  # Anzahl der gewünschten Pods
+  selector:
+    matchLabels:
+      app: postgres  # Label-Selector für die Pods
+  template:
+    metadata:
+      labels:
+        app: postgres  # Label für die Pods
+    spec:
+      containers:
+        - name: postgres  # Name des Containers
+          image: postgres:latest  # Verwendetes Docker-Image
+          env:
+            - name: POSTGRES_DB
+              value: vehicles  # Name der zu erstellenden Datenbank
+            - name: POSTGRES_USER
+              value: root  # Benutzername für die DB
+            - name: POSTGRES_PASSWORD
+              value: root  # Passwort für die DB
+          ports:
+            - containerPort: 5432  # Port, auf dem PostgreSQL im Container läuft
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/14/main  # Speicherort der Daten im Container
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-data-pvc  # Verwendeter PVC für persistente Daten
+
+
+# Die Datei definiert ein Kubernetes Deployment für eine PostgreSQL-Datenbank. 
+# Ein Deployment sorgt dafür, dass eine bestimmte Anzahl von Pods (in diesem Fall einer) immer im Cluster läuft und verwaltet deren Lebenszyklus, z.B. bei Updates oder Ausfällen.
+
+# Im Abschnitt metadata wird das Deployment mit dem Namen postgres versehen. Unter spec.replicas ist festgelegt, dass genau ein Pod gestartet werden soll. 
+# Der selector und die Labels sorgen dafür, dass das Deployment genau die richtigen Pods verwaltet.
+
+# Im template-Abschnitt wird beschrieben, wie die Pods aussehen sollen. Jeder Pod erhält das Label app: postgres und enthält einen Container mit dem Namen postgres, 
+# der auf dem offiziellen Docker-Image postgres:latest basiert.
+
+# Über die Umgebungsvariablen POSTGRES_DB, POSTGRES_USER und POSTGRES_PASSWORD werden beim Start des Containers die Datenbank vehicles, 
+# der Benutzer root und das Passwort root angelegt.
+
+# Der Container öffnet den Port 5432, damit von außen auf die Datenbank zugegriffen werden kann. 
+# Damit die Daten der Datenbank auch nach einem Neustart des Pods erhalten bleiben, wird ein Volume eingebunden: Das Volume postgres-data wird an den Pfad /var/lib/postgresql/14/main im Container gemountet. Dieses Volume ist mit einem PersistentVolumeClaim (postgres-data-pvc) verbunden, der sicherstellt, dass der Speicherplatz dauerhaft und unabhängig vom Lebenszyklus des Pods zur Verfügung steht.
+
+# Zusammengefasst sorgt diese Datei dafür, dass eine PostgreSQL-Datenbank mit persistentem Speicher im Kubernetes-Cluster läuft, 
+# die über definierte Zugangsdaten und eine initiale Datenbank verfügt.
