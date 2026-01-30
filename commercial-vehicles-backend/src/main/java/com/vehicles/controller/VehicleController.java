@@ -1,6 +1,7 @@
 package com.vehicles.controller;
 
 import com.vehicles.exceptions.NoVehicleFoundException;
+import com.vehicles.model.Truck;
 import com.vehicles.model.Vehicle;
 import com.vehicles.service.VehicleService;
 

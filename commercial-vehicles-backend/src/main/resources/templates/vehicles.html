@@ -3,8 +3,44 @@
 <head>
   <title>Boot Web</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/webjars/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-  <h1 th:text="${message}" />
+    <!-- Zurück-Button -->
+<div class="mb-3">
+    <button type="button" class="btn btn-secondary" onclick="window.location.href='/vw'">
+        <i class="fa fa-arrow-left"></i> Zurück zum Hinzufügen
+    </button>
+</div>
+
+    <h1>Fahrzeugliste</h1>
+    <!-- Fahrzeugliste als Tabelle -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Modell</th>
+                <th>Baujahr</th>
+                <th>Kilometerstand</th>
+                <th>Ladekapazität</th>
+                <th>Aktion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="vehicle : ${vehicles}">
+                <td th:text="${vehicle.model}">Modell</td>
+                <td th:text="${vehicle.vehicleYear}">Baujahr</td>
+                <td th:text="${vehicle.mileage}">Kilometerstand</td>
+                <td th:text="${vehicle.loadCapacity}">Ladekapazität</td>
+                <td>
+                    <form th:action="@{/vw/vehicles/delete}" method="POST" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${vehicle.id}" />
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Wirklich löschen?')">Löschen</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  
 </body>
 </html>

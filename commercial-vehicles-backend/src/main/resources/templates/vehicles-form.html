@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Fahrzeuge verwalten</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1>Fahrzeuge</h1>
+
+        <!-- Fahrzeug hinzufügen -->
+        <form method="POST" th:action="@{/vw/addtruck}" th:object="${truck}" class="mb-4">
+            <div class="row g-2">
+                <div class="col-md-3">
+                    <input type="text" th:field="*{model}" class="form-control" placeholder="Modell" required />
+                </div>
+                <div class="col-md-2">
+                    <input type="number" th:field="*{vehicleYear}" class="form-control" placeholder="Baujahr" required />
+                </div>
+                <div class="col-md-3">
+                    <input type="number" th:field="*{mileage}" class="form-control" placeholder="Kilometerstand" required />
+                </div>
+                <div class="col-md-2">
+                    <input type="number" th:field="*{loadCapacity}" class="form-control" placeholder="Ladekapazität" required />
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="fa fa-plus"></i> Fahrzeug hinzufügen
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <h1>Fahrzeugliste</h1>
+        <!-- Fahrzeugliste als Tabelle (nur Anzeige) -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Modell</th>
+                    <th>Baujahr</th>
+                    <th>Kilometerstand</th>
+                    <th>Ladekapazität</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="vehicle : ${vehicles}">
+                    <td th:text="${vehicle.model}">Modell</td>
+                    <td th:text="${vehicle.vehicleYear}">Baujahr</td>
+                    <td th:text="${vehicle.mileage}">Kilometerstand</td>
+                    <td th:text="${vehicle.loadCapacity}">Ladekapazität</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="mb-3">
+            <button type="button"  class="btn btn-success w-100" onclick="window.location.href='/vw/vehicles'">
+                <i class="fa fa-arrow-right ms-2"></i> zur Fahrzeugliste
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>
