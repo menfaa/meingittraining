@@ -18,10 +18,16 @@ public class VehiclesWebController {
     @Autowired
     private VehicleService vehicleService;
 
+    @PostMapping("/back")
+    public String backToAddForm() {
+        // Hier kannst du ggf. Logik einfügen
+        return "redirect:/vw";
+    }
+
     @PostMapping(value = "/delete")
     public String deleteTruck(@RequestParam Long id) {
         vehicleService.deleteVehicle(id);
-        return "redirect:/vw/vehicles"; // Nach dem Löschen zurück zur Übersicht
+        return "vehicles"; // Nach dem Löschen zurück zur Übersicht
     }
 
     @GetMapping()

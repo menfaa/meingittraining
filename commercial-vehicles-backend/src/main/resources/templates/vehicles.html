@@ -8,11 +8,11 @@
 </head>
 <body>
     <!-- Zurück-Button -->
-<div class="mb-3">
-    <button type="button" class="btn btn-secondary" onclick="window.location.href='/vw'">
-        <i class="fa fa-arrow-left"></i> Zurück zum Hinzufügen
-    </button>
-</div>
+    <div class="mb-3">
+        <form th:action="@{/vw/vehicles/back}" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-sm">Zurück</button>
+        </form>
+    </div>
 
     <h1>Fahrzeugliste</h1>
     <!-- Fahrzeugliste als Tabelle -->
