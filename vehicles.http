@@ -1,0 +1,34 @@
+GET http://localhost:8080/api/vehicles
+
+###
+POST http://localhost:8080/api/vehicles
+Content-Type: application/json
+
+{
+  "model": "VW Passat",
+  "vehicleYear": 2014,
+  "mileage": 172000,
+  "loadCapacity": 60
+}
+
+###
+POST http://localhost:8080/api/vehicles
+Content-Type: application/json
+
+{
+  "model": "VW Golf",
+  "vehicleYear": 2020,
+  "mileage": 112000,
+  "loadCapacity": 50
+}
+
+
+###
+GET http://localhost:8080/api/vehicles
+
+###
+GET http://localhost:8080/api/vehicles/1
+
+
+###
+DELETE http://localhost:8080/api/vehicles/1

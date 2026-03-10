@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-backend  # Name des Deployments
+spec:
+  replicas: 1  # Anzahl der gewünschten Pods
+  selector:
+    matchLabels:
+      app: vehicle-backend  # Label-Selector für die Pods
+  template:
+    metadata:
+      labels:
+        app: vehicle-backend  # Label für die Pods
+    spec:
+      containers:
+        - name: commercial-vehicles-backend-app  # Name des Containers
+          image: nmenfaa/commercial-vehicles-backend-app:latest  # Verwendetes Docker-Image aus Docker Hub
+          ports:
+            - containerPort: 8080  # Port, auf dem die App im Container läuft
+          envFrom:
+            - configMapRef:
+                name: vehicle-backend-env
+            - secretRef:
+                name: vehicle-backend-secret

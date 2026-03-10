@@ -1,0 +1,8 @@
+. docker tag commercial-vehicles-backend-app:latest nmenfaa/commercial-vehicles-backend-app:latest
+. docker push nmenfaa/commercial-vehicles-backend-app:latest
+. kubectl apply -f postgres-deployment.yaml 
+. kubectl apply -f postgres-pvc.yaml 
+. kubectl apply -f postgres-service.yaml 
+. kubectl apply -f vehicle-backend-deployment.yaml 
+
+when neu build: kubectl delete pod <pod-name>

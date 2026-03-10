@@ -1,0 +1,9 @@
+apiVersion: v1                   # API-Version für Kubernetes-Objekte
+kind: ConfigMap                  # Typ des Objekts: ConfigMap
+metadata:                        # Metadaten für das Objekt
+  name: vehicle-backend-env      # Name der ConfigMap
+data:                            # Datenbereich für Key-Value-Paare (Umgebungsvariablen)
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/vehicles        # Verbindungs-URL zur PostgreSQL-Datenbank
+  SPRING_FLYWAY_ENABLED: "true"                                          # Flyway Migration aktivieren
+  SPRING_FLYWAY_LOCATIONS: classpath:db/migration                        # Pfad zu Flyway-Migrationen
+  SPRING_JPA_HIBERNATE_DDL_AUTO: update                                  # Hibernate DDL-Auto-Strategie

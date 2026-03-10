@@ -1,0 +1,65 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '4.0.1'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.webjars:bootstrap:5.3.2'
+	implementation 'org.webjars:font-awesome:6.4.2'
+	implementation 'org.webjars:webjars-locator-core:0.48'
+	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+		// Datenbank Dependencies
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	//runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.flywaydb:flyway-core'
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-test'
+	testImplementation 'org.testcontainers:testcontainers-junit-jupiter:2.0.3'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	//testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+
+	//TestContainer dependency
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	testImplementation 'org.testcontainers:testcontainers-postgresql:2.0.3'
+
+	 // REQUIRED for TestRestTemplate in Spring Boot 4.0.1
+    testImplementation 'org.springframework.boot:spring-boot-starter-restclient-test'
+    
+    // Core module required because the starter misses transitive links in 4.0.1
+    testImplementation 'org.springframework.boot:spring-boot-restclient'
+
+	 testImplementation 'org.assertj:assertj-core:3.24.2'
+
+	 testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
+	
+
+
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
