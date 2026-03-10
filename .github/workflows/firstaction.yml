@@ -50,7 +50,7 @@ jobs:
       # 7. Test der REST-API: GET Request
       - name: Test API - GET Vehicles
         # Sendet einen GET-Request und zeigt das Ergebnis im Log
-        run: curl -v http://localhost:8080/api/vehicles || echo "App not reachable yet"
+        run: curl -v http://localhost:8000/api/vehicles || echo "App not reachable yet"
 
       # 8. Test der REST-API: POST Request (Beispiel)
       - name: Test API - POST Vehicle
@@ -58,7 +58,7 @@ jobs:
         run: |
           curl -X POST http://localhost:8000/api/vehicles \
           -H "Content-Type: application/json" \
-          -d '{"brand": "Mercedes", "model": "Actros"}' \
+          -d '{"model": "Mercedes", "vehicleYear": 2014,"mileage": 172000,"loadCapacity": 60}' \
           -v
 
       # 9. Fehlerdiagnose: Falls etwas schiefläuft, zeige die App-Logs
