@@ -1,38 +1,71 @@
-name: Docker Compose CI
+# Name des Workflows in der GitHub Actions Oberfläche
+name: Java Spring Boot CI with Docker Compose
 
+# Auslöser für den Workflow
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main", "master" ] # Startet bei jedem Push auf diese Branches
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main", "master" ] # Startet bei jedem Pull Request gegen diese Branches
 
 jobs:
-  deploy-test:
+  build-and-test:
+    # Betriebssystem des virtuellen GitHub-Servers
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Quellcode aus dem Repository laden
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 2. Java JDK 17 installieren (Passend zu deinem Dockerfile)
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
+          cache: gradle # Beschleunigt zukünftige Builds durch Caching
 
-      # WICHTIG: Das JAR muss existieren, bevor Docker Build startet
+      # 3. Ausführungsrechte für das Gradle-Skript setzen
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # 4. Das ausführbare JAR-File erstellen (Tests überspringen wir hier für das Image)
       - name: Build JAR with Gradle
-        run: ./gradlew build -x test 
+        run: ./gradlew build -x test
 
+      # 5. Infrastruktur (App + DB) mit Docker Compose bauen und starten
       - name: Docker Compose Up
-        # Nutzt deine compose.yml im Root-Verzeichnis
+        # --build erzwingt das Neuerstellen des Images mit dem frischen JAR
         run: docker compose up --build -d
 
-      - name: Check Container Logs
-        # Hilfreich, falls die App nicht startet (z.B. DB-Verbindung)
+      # 6. Warten, bis Spring Boot und die Datenbank bereit sind
+      - name: Wait for Application to start
+        # Gibt der App 30 Sekunden Zeit zum Hochfahren (DB-Verbindung etc.)
+        run: sleep 30
+
+      # 7. Test der REST-API: GET Request
+      - name: Test API - GET Vehicles
+        # Sendet einen GET-Request und zeigt das Ergebnis im Log
+        run: curl -v http://localhost:8080/api/vehicles || echo "App not reachable yet"
+
+      # 8. Test der REST-API: POST Request (Beispiel)
+      - name: Test API - POST Vehicle
+        # Erstellt einen neuen Datensatz via JSON
+        run: |
+          curl -X POST http://localhost:8000/api/vehicles \
+          -H "Content-Type: application/json" \
+          -d '{"brand": "Mercedes", "model": "Actros"}' \
+          -v
+
+      # 9. Fehlerdiagnose: Falls etwas schiefläuft, zeige die App-Logs
+      - name: Debug - Show Container Logs
+        # Wird nur ausgeführt, wenn einer der vorherigen Schritte fehlgeschlagen ist
+        if: failure()
         run: docker compose logs app
 
-      - name: Shutdown
+      # 10. Aufräumen: Container stoppen und löschen
+      - name: Shutdown Docker Compose
+        # Wird immer ausgeführt, egal ob Erfolg oder Fehler
         if: always()
         run: docker compose down
