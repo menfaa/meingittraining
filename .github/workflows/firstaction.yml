@@ -38,6 +38,9 @@ jobs:
       - name: Docker Compose Up
         # --build erzwingt das Neuerstellen des Images mit dem frischen JAR
         run: docker compose up --build -d
+        env:
+          # Deaktiviert die problematischen System-Metriken
+          MANAGEMENT_METRICS_BINDERS_PROCESSOR_ENABLED: false
 
       # 6. Warten, bis Spring Boot und die Datenbank bereit sind
       - name: Wait for Application to start
