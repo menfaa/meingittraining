@@ -15,6 +15,8 @@ services:
       SPRING_FLYWAY_LOCATIONS: classpath:db/migration
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       MANAGEMENT_METRICS_BINDERS_PROCESSOR_ENABLED: "false"
+      SPRING_AUTOCONFIGURE_EXCLUDE: org.springframework.boot.actuate.autoconfigure.metrics.export.simple.SimpleMetricsExportAutoConfiguration,org.springframework.boot.actuate.autoconfigure.metrics.SystemMetricsAutoConfiguration
+      
     depends_on:
       db:
         condition: service_healthy # Wartet, bis die Datenbank bereit ist
